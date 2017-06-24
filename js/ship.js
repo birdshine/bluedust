@@ -45,9 +45,6 @@ Ship.prototype.init = function(distance,food,engines,cargo,money,guns,fuel,loot)
 
 Ship.prototype.initiate = function() {
     this.init(0,20,3,0,0,1,10,0);
-    this.addCrew('eve', 'first woman');
-    this.addCrew('adam', 'first man');
-    this.addCrew('lilith', 'first noncompliant');
 };
 
 Ship.prototype.weighShip = function() {

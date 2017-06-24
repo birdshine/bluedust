@@ -23,9 +23,17 @@ function Person(name, profession) {
 }
 
 Person.prototype.getName = function() {
-        return this.name;
+    return this.name;
 }
 
 Person.prototype.getProfession = function() {
-        return this.profession;
+    return this.profession;
+};
+
+Person.prototype.getXP = function() {
+    return this.xp;
+};
+
+Person.prototype.getWounds = function() {
+    return this.wounds;
 };

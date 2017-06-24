@@ -63,8 +63,16 @@ var UI = {
         
         // display crew
         $('#wrapper .crew').on('mouseenter', function() {
-            $divCrew = "<figure class='col-sm-12 ship-menu-hover'></figure>";
-            $('#ship-menu-hover').append($divCrew);
+            if (Game.player.crewSize > 0) {
+                $divCrew = "<figure class='col-sm-12 ship-menu-hover' id='crew-manifest'></figure>";
+                $('#ship-menu-hover').append($divCrew);
+                for (attr in Game.player.crewList) {
+                    $divCrewMember = "<div class='row'><figure class='col-sm-12 crew-member-entry'>" 
+                                     + Game.player.crewList[attr].getName() + ": " 
+                                     + Game.player.crewList[attr].getProfession() + "</figure></div>";
+                    $('#crew-manifest').append($divCrewMember); 
+                };
+            };
         });
 
         $('#wrapper .crew').on('mouseleave', function() {
