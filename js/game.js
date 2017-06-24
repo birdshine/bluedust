@@ -7,7 +7,7 @@ var Game = {
 
     //initiate the player
     initPlayer: function() {
-        var player = Ship;
+        var player = new Ship('player');
         player.initiate();
         Game.player = player;
     }
