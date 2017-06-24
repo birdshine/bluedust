@@ -147,7 +147,7 @@ var UI = {
     // create the ship ui 
     shipInit: function(ship) {
         // create messages for the user letting them know the ship is online and they are low on fuel
-        UI.createMessage('online', 'SHIP functions fully restoryed. This vessel is online and operational.', 
+        UI.createMessage('online', 'SHIP functions fully restored. This vessel is online and operational.', 
                          'positive', 'ship rebooted');
         UI.createMessage('warning', 'WARNING: Low fuel. Refuel before attempting launch.',
                          'negative', 'low fuel warning');
@@ -182,14 +182,30 @@ var UI = {
         $('#footer').append($divShipInfo);
 
         // fill ship stats with player ship info
+        UI.refreshShipInfo(ship);
+
+        UI.refreshClickListener();
+    },
+
+    refreshShipInfo: function(ship) {
+        // refresh ship info display
+        $('#ship-day').empty();
         $('#ship-day').append(ship.day);
+        $('#ship-distance').empty();
         $('#ship-distance').append(ship.distance);
+        $('#ship-crew').empty();
         $('#ship-crew').append(ship.crewSize);
+        $('#ship-food').empty();
         $('#ship-food').append(ship.food);
+        $('#ship-engines').empty();
         $('#ship-engines').append(ship.engines);
+        $('#ship-hull').empty();
         $('#ship-hull').append(ship.hull);
         $('#ship-damage').append(ship.damage);
+        $('#ship-damage').empty();
+        $('#ship-money').empty();
         $('#ship-money').append(ship.money);
+        $('#ship-fuel').empty();
         $('#ship-fuel').append(ship.fuel);
 
         UI.refreshClickListener();

@@ -71,7 +71,7 @@ var Ship = {
         };
     },
 
-    // see if ship has capacity to take on weight, returs true if there's capacity, else false
+    // see if ship has capacity to take on weight, returns true if there's capacity, else false
     attemptWeight: function(weight) {
         this.weighShip();
         attempt = this.shipWeight + weight;
@@ -123,7 +123,8 @@ var Ship = {
             var crew = Person;
             crew.init(name, profession);
             var key = this.crewSize;
-            this.crewList[key] = crew;
+            var value = crew;
+            this.crewList[key] = value;
             this.crewSize++;
         } else {
             alert('cannot take crew member');
