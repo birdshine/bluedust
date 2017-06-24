@@ -50,7 +50,7 @@ var Ship = {
         this.addCrew('lilith', 'first noncompliant');
         for (attr in this.crewList) {
             alert(attr);
-            alert(this.crewList[attr].name);
+            alert(this.crewList[attr].getName());
         };
     },
 

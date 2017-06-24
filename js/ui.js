@@ -184,7 +184,7 @@ var UI = {
         // fill ship stats with player ship info
         $('#ship-day').append(ship.day);
         $('#ship-distance').append(ship.distance);
-        $('#ship-crew').append(ship.crew);
+        $('#ship-crew').append(ship.crewSize);
         $('#ship-food').append(ship.food);
         $('#ship-engines').append(ship.engines);
         $('#ship-hull').append(ship.hull);
