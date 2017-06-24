@@ -7,7 +7,7 @@ function Ship(name) {
     this.MAXIMUM_SPEED = 800;
     this.WEIGHT_PER_ENGINE = 5;
     this.SPEED_PER_ENGINE = 20,
-    this.CREW_WEIGHT = 0;
+    this.CREW_WEIGHT = 2;
     this.DRONE_WEIGHT = 0.33;
     this.LOOT_WEIGHT = 0.5;
     this.GUNS_WEIGHT = 0.8;
@@ -48,22 +48,17 @@ Ship.prototype.initiate = function() {
     this.addCrew('eve', 'first woman');
     this.addCrew('adam', 'first man');
     this.addCrew('lilith', 'first noncompliant');
-    for (attr in this.crewList) {
-        alert(attr);
-        alert(this.crewList[attr]);
-    };
 };
 
-Ship.prototype.weighShip = function(ship) {
-    var crew = this.crewSize * Ship.CREW_WEIGHT;
-    var food = this.food * Ship.FOOD_WEIGHT;
-    var guns = this.guns * Ship.GUNS_WEIGHT;
-    var fuel = this.fuel * Ship.FUEL_WEIGHT;
-    var loot = this.loot * Ship.LOOT_WEIGHT;
+Ship.prototype.weighShip = function() {
+    var crew = this.crewSize * this.CREW_WEIGHT;
+    var food = this.food * this.FOOD_WEIGHT;
+    var guns = this.guns * this.GUNS_WEIGHT;
+    var fuel = this.fuel * this.FUEL_WEIGHT;
+    var loot = this.loot * this.LOOT_WEIGHT;
     var shipWeight = crew + food + guns + fuel + loot;
-    var weightCapacity = this.engines * Ship.WEIGHT_PER_ENGINE;
+    var weightCapacity = this.engines * this.WEIGHT_PER_ENGINE;
     this.shipWeight = shipWeight;
-    alert('ship weight: ' + this.shipWeight + 'ship capacity: ' + weightCapacity);
     if (shipWeight <= weightCapacity) {
         return true;
     } else {
@@ -74,8 +69,7 @@ Ship.prototype.weighShip = function(ship) {
 Ship.prototype.attemptWeight = function(weight) {
     this.weighShip();
     attempt = this.shipWeight + weight;
-    alert('attempt weight: ' + attempt);
-    capacity = this.engines * Ship.WEIGHT_PER_ENGINE;
+    capacity = this.engines * this.WEIGHT_PER_ENGINE;
     if (attempt <= capacity) {
         return true;
     } else {
@@ -98,8 +92,7 @@ Ship.prototype.addCrew = function(name, profession) {
     var attempt = this.attemptWeight(this.CREW_WEIGHT);
     if (attempt === true) {
         var crew = new Person(name, profession);
-        alert(crew);
-        var key = this.crewSize;
+        var key = crew.getName();
         this.crewList[key] = crew;
         this.crewSize++;
     } else {
