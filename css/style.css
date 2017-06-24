@@ -1,0 +1,257 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+header {
+  padding: 20px 0;
+}
+
+header .row,
+footer .row {
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  font-weight: 700;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+header p {
+  padding: 0 20px;
+  margin: 0;
+}
+
+.jumbotron {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  color: #434543;
+  height: 0px;
+  text-shadow: 0.25px 0.25px 0.25px #000000;
+}
+
+.jumbotron h2 {
+  font-size: 60px;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+}
+
+.jumbotron h3 {
+  margin: 0 0 20px;
+  color: #fff;
+}
+
+section .row img {
+  margin: 0 0 30px;
+  width: 100%;
+}
+
+.col-md-6 {
+  margin: 0 0 30px;
+}
+
+.btn.btn-primary {
+  border-radius: 2px;
+  border: 0px;
+  color: #000;
+  text-shadow: none;
+  background-color: #ffffff;
+}
+
+.btn.btn-primary:hover {
+  color: #ffffff;
+  background-color: #48ec48;
+}
+
+.btn-secondary {
+  background-color: #E8DFE0;
+  color: #ffffff;
+  margin: 0 0 30px;
+}
+
+footer {
+  font-size: 12px;
+  padding: 20px 0;
+}
+
+footer .col-sm-8 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer li img {
+  width: 32px;
+  height: 32px;
+}
+
+.terminal {
+    height: 35px;
+    padding: 7px 0 7px 7px;
+    margin: 0;
+    font: bold 14px/16px "lucida console",sans-serif;
+    color: #3e403e;
+}
+
+.screen {
+  padding: 10px;
+  margin: 2px 0 0 0;
+  height: 400px;
+  overflow-x: none;
+  overflow-y: scroll;
+}
+
+.message-positive {
+  padding: 20px 10px 20px 40px;
+  margin: 3px;
+  min-height: 80px;
+  background-color: #fff;
+  border: 2px solid #000;
+  font: bold 14px/16px "lucida console",sans-serif;
+  color: #000;
+}
+
+.message-negative {
+  padding: 20px 10px 20px 40px;
+  margin: 3px;
+  min-height: 80px;
+  background-color: #fff;
+  border: 2px solid #f70606;
+  font: bold 14px/16px "lucida console",sans-serif;
+  color: #f70606;
+}
+
+.message-header {
+  padding: 0px;
+  margin: 0px 0px 5px 0px;
+}
+
+.message-title {
+  padding: 0px;
+  margin: 5px 40px 0px 5px;
+  font: bold 18px/24px "lucida console",sans-serif;
+  color: #000;
+  float: left;
+  cursor: pointer;
+}
+
+.close-message {
+  float: right;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  cursor: pointer;
+  vertical-align: middle;
+  width: 25px;
+  min-height: 25px;
+  padding: 0;
+  margin: 5px;
+  background-color: #f70606;
+  color: #000;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.close-message:hover {
+  background-color: #f83a3a;
+}
+
+.message-content {
+  cursor: pointer;
+}
+
+#user-terminal {
+    width: 100%;
+    padding: 3px 3px 3px 0;
+    margin: 0;
+}
+
+.user-nav {
+  min-width: 70px;
+}
+
+#user-echo {
+  margin: 0 20px 0 20px;
+}
+
+#log {
+  width: 100%;
+  min-height: 65px;
+  text-justify: top;
+}
+
+#log-title {
+  float: left;
+  margin: 0 0 0 60px;
+  vertical-align: center;
+}
+
+#log-close {
+  margin: 0 20px 0 0;
+  height: 25px;
+  width: 20px;
+  float: right;
+  cursor: pointer;
+  vertical-align: center;
+}
+
+.ship-info {
+  margin: 5px 20px 5px 20px;
+  padding: 2px;
+  width: 100%;
+  cursor: pointer;
+  font: 14px/14px "lucida console",sans-serif;
+}
+
+.ship-menu {
+  position: relative;
+}
+
+.ship-menu-hover {
+  position: absolute;
+  margin: 5px;
+  padding: 10px;
+  width: 100%;
+  z-index: 1;
+  border: 1px solid #000;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background-color: #fff;
+  top: -90px;
+  text-align: center;
+}
+
+#ship-menu-hover {
+  height: 0;
+}
+
+.ship-menu-button {
+  margin: auto;
+}
+
+/*
+  inputs
+*/
+
+#user-terminal-text {
+    width: 100%;
+    border: 0;
+}
+
+/*
+  lists
+*/
+
+#log-ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
