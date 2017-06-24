@@ -25,7 +25,7 @@ var Ship = {
     damage: 0,
     shipWeight: 0,
     crewList: {},
-    crew: 0,
+    crewSize: 0,
     
     // init and initiate with standard player or enemy settings
     init: function(distance,food,engines,cargo,money,guns,fuel,loot) {
@@ -49,13 +49,14 @@ var Ship = {
         this.addCrew('adam', 'first man');
         this.addCrew('lilith', 'first noncompliant');
         for (attr in this.crewList) {
-            
+            alert(attr);
+            alert(this.crewList[attr].name);
         };
     },
 
     // ship functions
     weighShip: function() {
-        var crew = this.crew * Ship.CREW_WEIGHT;
+        var crew = this.crewSize * Ship.CREW_WEIGHT;
         var food = this.food * Ship.FOOD_WEIGHT;
         var guns = this.guns * Ship.GUNS_WEIGHT;
         var fuel = this.fuel * Ship.FUEL_WEIGHT;
@@ -121,10 +122,9 @@ var Ship = {
         if (attempt === true) {
             var crew = Person;
             crew.init(name, profession);
-            this.crewList[this.crew] = crew;
-            alert('before add ' + this.crew);
-            this.crew++;
-            alert('after add ' + this.crew);
+            var key = this.crewSize;
+            this.crewList[key] = crew;
+            this.crewSize++;
         } else {
             alert('cannot take crew member');
             return false;
