@@ -2,7 +2,7 @@
 javascript text game
 
 how to use:
-currently unusable.
+1. currently unusable.
 
 recent changes:
 1. broke crewList or ship.init

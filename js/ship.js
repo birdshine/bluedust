@@ -50,7 +50,7 @@ var Ship = {
         this.addCrew('lilith', 'first noncompliant');
         for (attr in this.crewList) {
             alert(attr);
-            alert(this.crewList[attr].getName());
+            alert(this.crewList[attr]);
         };
     },
 
@@ -123,7 +123,7 @@ var Ship = {
             var crew = Person;
             crew.init(name, profession);
             var key = this.crewSize;
-            var value = crew;
+            var value = crew.getName();
             this.crewList[key] = value;
             this.crewSize++;
         } else {
