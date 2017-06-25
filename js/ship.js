@@ -22,11 +22,24 @@ function Ship(name) {
     this.name = name;
     this.cargo = [];
     this.cargoWeight = 0;
-    this.armory = [];
+    this.armory = {};
     this.damage = 0;
     this.shipWeight = 0;
     this.crewList = {};
     this.crewSize = 0;
+};
+
+// getters and setters 
+Ship.prototype.getName = function() {
+    return this.name;
+};
+
+Ship.prototype.getCargoWeight = function() {
+    return this.cargoWeight;
+};
+
+Ship.prototype.getDamage = function() {
+    return this.damage;
 };
 
 Ship.prototype.init = function(distance,food,engines,cargo,money,guns,fuel,loot) {
@@ -45,6 +58,8 @@ Ship.prototype.init = function(distance,food,engines,cargo,money,guns,fuel,loot)
 
 Ship.prototype.initiate = function() {
     this.init(0,20,3,0,0,1,10,0);
+    var testWeapon = ItemList.shipGunLaser();
+    this.addWeapon(testWeapon);
 };
 
 Ship.prototype.weighShip = function() {
@@ -93,7 +108,18 @@ Ship.prototype.addCrew = function(name, profession) {
         this.crewList[key] = crew;
         this.crewSize++;
     } else {
-        alert('cannot take crew member');
         return false;
     };
+};
+
+Ship.prototype.addWeapon = function (weapon) {
+    var attempt = this.attemptWeight(this.GUNS_WEIGHT);
+    if (attempt === true) {
+        var key = Die.generateId();
+        var value = weapon;
+        this.armory[key] = value;
+        this.damage += weapon.damage;
+    } else {
+        return false
+    }
 };

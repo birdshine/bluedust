@@ -209,8 +209,8 @@ var UI = {
         $('#ship-engines').append(ship.engines);
         $('#ship-hull').empty();
         $('#ship-hull').append(ship.hull);
-        $('#ship-damage').append(ship.damage);
         $('#ship-damage').empty();
+        $('#ship-damage').append(ship.damage);
         $('#ship-money').empty();
         $('#ship-money').append(ship.money);
         $('#ship-fuel').empty();

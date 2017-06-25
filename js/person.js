@@ -22,9 +22,10 @@ function Person(name, profession) {
     this.profession = profession;
 }
 
+// person getters and setters
 Person.prototype.getName = function() {
     return this.name;
-}
+};
 
 Person.prototype.getProfession = function() {
     return this.profession;
