@@ -59,6 +59,30 @@ var Game = {
                               'negative', 'cargo destroyed');
         };
     },
+
+    attemptAddFuel: function(number) {
+        var weight = number * Game.player.FUEL_WEIGHT;
+        var attempt = Game.player.attemptWeight(weight);
+        if (attempt === true) {
+            Game.player.addFuel(number);
+            UI.createMessage('refueled', (number + ' fuel added.'), 'positive', 'refueled (' + number + ')');
+
+            UI.refreshShipInfo(Game.player);
+        } else {
+            while (attempt === false) {
+                number = number * 0.5;
+                weight = number * Game.player.FUEL_WEIGHT;
+                attempt = Game.player.attemptWeight(weight);
+                if (number < 1) {
+                    number = 0;
+                };
+            };
+            Game.player.addFuel(number);
+            UI.createMessage('refueled', ('siphoned ' + number + ' fuel.'), 'positive', 'refueled (' + number + ')');
+
+            UI.refreshShipInfo(Game.player);
+        };
+    }
 };
 
 /*

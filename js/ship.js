@@ -9,8 +9,8 @@ function Ship(name) {
     this.WEIGHT_PER_ENGINE = 5;
     this.SPEED_PER_ENGINE = 20,
     this.CREW_WEIGHT = 2;
-    this.FOOD_WEIGHT = 0.2;
-    this.FUEL_WEIGHT = 0.3;
+    this.FOOD_WEIGHT = 0.02;
+    this.FUEL_WEIGHT = 0.09;
     this.CREW_HUNGER = 0.2;
     this.DAY_PER_DISTANCE = 0.33;
     this.FUEL_PER_DAY = 1;
@@ -132,4 +132,9 @@ Ship.prototype.addWeapon = function(weapon) {
     this.calculateDamage();
     this.weighShip();
     return key;
+};
+
+Ship.prototype.addFuel = function(number) {
+    this.fuel += number;
+    this.weighShip();
 };
