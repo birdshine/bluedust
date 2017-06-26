@@ -25,4 +25,5 @@ $(document).ready(function() {
 
     // initiate ship UI
     UI.shipInit(Game.player);
+    UI.refreshClickListener();
 });

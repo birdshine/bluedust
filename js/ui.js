@@ -179,7 +179,9 @@ var UI = {
                        <figure class='col-sm-1 ship-menu' id='ship-money-title'>money</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-money'></figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-fuel-title'>fuel</figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-fuel'></figure></div>\
+                       <figure class='col-sm-1 ship-menu' id='ship-fuel'></figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-weight-title'>weight</figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-weight'></figure></div>\
                        <div class='row ship-info' id='ship-menu'>\
                        <figure class='col ship-menu-button'>status</figure>\
                        <figure class='col ship-menu-button'>cargo</figure>\
@@ -191,14 +193,10 @@ var UI = {
 
         // fill ship stats with player ship info
         UI.refreshShipInfo(ship);
-
-        UI.refreshClickListener();
     },
 
     refreshShipInfo: function(ship) {
         // refresh ship info display
-        $('#ship-day').empty();
-        $('#ship-day').append(ship.day);
         $('#ship-distance').empty();
         $('#ship-distance').append(ship.distance);
         $('#ship-crew').empty();
@@ -215,6 +213,10 @@ var UI = {
         $('#ship-money').append(ship.money);
         $('#ship-fuel').empty();
         $('#ship-fuel').append(ship.fuel);
+        $('#ship-weight').empty();
+        $('#ship-weight').append(ship.shipWeight);
+        $('#ship-day').empty();
+        $('#ship-day').append(ship.day);
 
         UI.refreshClickListener();
     }

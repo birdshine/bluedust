@@ -8,9 +8,6 @@ function Ship(name) {
     this.WEIGHT_PER_ENGINE = 5;
     this.SPEED_PER_ENGINE = 20,
     this.CREW_WEIGHT = 2;
-    this.DRONE_WEIGHT = 0.33;
-    this.LOOT_WEIGHT = 0.5;
-    this.GUNS_WEIGHT = 0.8;
     this.FOOD_WEIGHT = 0.2;
     this.FUEL_WEIGHT = 0.3;
     this.CREW_HUNGER = 0.2;
@@ -20,13 +17,25 @@ function Ship(name) {
 
     // local variables
     this.name = name;
-    this.cargo = [];
+    this.cargoList = {};
+    this.cargoSize = 0;
     this.cargoWeight = 0;
     this.armory = {};
+    this.armorSize = 0;
+    this.armoryWeight = 0;
     this.damage = 0;
-    this.shipWeight = 0;
     this.crewList = {};
     this.crewSize = 0;
+    this.crewWeight = 0;
+    this.foodWeight = 0;
+    this.droneList = {};
+    this.droneSize = 0;
+    this.droneWeight = 0;
+    this.fuelWeight = 0;
+    this.shipWeight = 0;
+    this.day = 0;
+    this.distance = 0;
+    this.hull = 200;
 };
 
 // getters and setters 
@@ -42,33 +51,28 @@ Ship.prototype.getDamage = function() {
     return this.damage;
 };
 
-Ship.prototype.init = function(distance,food,engines,cargo,money,guns,fuel,loot) {
-    this.day = 0;
-    this.hull = 200;
-    this.distance = distance;
+Ship.prototype.init = function(food,engines,money,fuel) {
     this.food = food;
     this.engines = engines;
-    this.cargoCapacity = cargo;
     this.money = money;
-    this.guns = guns;
-    this.damage =  3 * guns;
     this.fuel = fuel;
-    this.loot = loot;
 };
 
 Ship.prototype.initiate = function() {
-    this.init(0,20,3,0,0,1,10,0);
-    var testWeapon = ItemList.shipGunLaser();
-    this.addWeapon(testWeapon);
+    this.init(20,3,20,10);
 };
 
 Ship.prototype.weighShip = function() {
     var crew = this.crewSize * this.CREW_WEIGHT;
+    this.crewWeight = crew;
     var food = this.food * this.FOOD_WEIGHT;
-    var guns = this.guns * this.GUNS_WEIGHT;
+    this.foodWeight = food;
     var fuel = this.fuel * this.FUEL_WEIGHT;
-    var loot = this.loot * this.LOOT_WEIGHT;
-    var shipWeight = crew + food + guns + fuel + loot;
+    this.fuelWeight = fuel;
+    var armory = this.armoryWeight;
+    var cargo = this.cargoWeight;
+    var drones = this.droneWeight;
+    var shipWeight = crew + food + fuel + armory + cargo + drones;
     var weightCapacity = this.engines * this.WEIGHT_PER_ENGINE;
     this.shipWeight = shipWeight;
     if (shipWeight <= weightCapacity) {
@@ -78,13 +82,13 @@ Ship.prototype.weighShip = function() {
     };
 };
 
-Ship.prototype.attemptWeight = function(weight) {
-    this.weighShip();
+Ship.prototype.attemptWeight = function(weight) { 
+    this.weighShip(); 
     attempt = this.shipWeight + weight;
     capacity = this.engines * this.WEIGHT_PER_ENGINE;
-    if (attempt <= capacity) {
-        return true;
-    } else {
+    if (attempt <= capacity) { 
+        return true; 
+    } else { 
         return false;
     };
 };
@@ -94,7 +98,7 @@ Ship.prototype.addCargo = function(item) {
         var attempt = this.attemptWeight(weight);
         if (attempt === true) {
             this.cargo.push(item);
-            this.shipWeight += weight;
+            this.cargoWeight += weight;
         } else {
             return false;
         };
@@ -107,19 +111,23 @@ Ship.prototype.addCrew = function(name, profession) {
         var key = crew.getName();
         this.crewList[key] = crew;
         this.crewSize++;
+        this.weighShip();
     } else {
         return false;
     };
 };
 
-Ship.prototype.addWeapon = function (weapon) {
-    var attempt = this.attemptWeight(this.GUNS_WEIGHT);
+Ship.prototype.addWeapon = function(weapon) {
+    var attempt = this.attemptWeight(weapon.weight);
     if (attempt === true) {
         var key = Die.generateId();
         var value = weapon;
         this.armory[key] = value;
+        this.armorSize++;
+        this.armoryWeight += weapon.weight;
         this.damage += weapon.damage;
+        this.weighShip();
     } else {
         return false
-    }
+    };
 };
