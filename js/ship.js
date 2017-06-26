@@ -5,6 +5,7 @@
 function Ship(name) {
     // global variables
     this.MAXIMUM_SPEED = 800;
+    this.MAXIMUM_CREW = 6;
     this.WEIGHT_PER_ENGINE = 5;
     this.SPEED_PER_ENGINE = 20,
     this.CREW_WEIGHT = 2;
@@ -33,6 +34,7 @@ function Ship(name) {
     this.droneWeight = 0;
     this.fuelWeight = 0;
     this.shipWeight = 0;
+    this.shipWeightDisplay = 0;
     this.day = 0;
     this.distance = 0;
     this.hull = 200;
@@ -66,11 +68,7 @@ Ship.prototype.weighShip = function() {
     var shipWeight = crew + food + fuel + armory + cargo + drones;
     var weightCapacity = this.engines * this.WEIGHT_PER_ENGINE;
     this.shipWeight = shipWeight;
-    if (shipWeight <= weightCapacity) {
-        return true;
-    } else {
-        return false;
-    };
+    this.shipWeightDisplay = Math.round(shipWeight);
 };
 
 Ship.prototype.calculateDamage = function() {
@@ -94,28 +92,34 @@ Ship.prototype.attemptWeight = function(weight) {
 };
 
 Ship.prototype.addCargo = function(item) {
-        var weight = item[4];
-        var attempt = this.attemptWeight(weight);
+        var attempt = this.attemptWeight(item.weight);
         if (attempt === true) {
-            this.cargo.push(item);
-            this.cargoWeight += weight;
+            var key = Die.generateId();
+            var value = item
+            this.cargoList[key] = value;
+            this.cargoSize++;
+            this.cargoWeight += item.weight;
+            this.weighShip();
         } else {
             return false;
         };
 };
 
 Ship.prototype.addCrew = function(name, profession) {
-    var attempt = this.attemptWeight(this.CREW_WEIGHT);
-    if (attempt === true) {
-        var crew = new Person(name, profession);
-        var key = crew.getName();
-        this.crewList[key] = crew;
-        this.crewSize++;
-        this.weighShip();
-        
+    if (this.crewSize < this.MAXIMUM_CREW) {
+        var attempt = this.attemptWeight(this.CREW_WEIGHT);
+        if (attempt === true) {
+            var crew = new Person(name, profession);
+            var key = crew.getName();
+            this.crewList[key] = crew;
+            this.crewSize++;
+            this.weighShip();
+        } else {
+            return false;
+        };
     } else {
         return false;
-    };
+    }
 };
 
 Ship.prototype.addWeapon = function(weapon) {

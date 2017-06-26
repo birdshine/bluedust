@@ -18,6 +18,7 @@ var UI = {
         $('#wrapper #log-close').off();
         $('#wrapper #user-terminal-text').off();
         $('#wrapper .crew').off();
+        $('#wrapper .weight').off();
 
         /* turn on buttons
            key stroke in player text terminal */
@@ -64,18 +65,63 @@ var UI = {
         // display crew
         $('#wrapper .crew').on('mouseenter', function() {
             if (Game.player.crewSize > 0) {
-                $divCrew = "<figure class='col-sm-12 ship-menu-hover' id='crew-manifest'></figure>";
+                $divCrew = "<figure class='col-sm-12 ship-menu-hover-crew' id='crew-manifest'>\
+                           <div class='row' id='crew-manifest-row'></div></figure>";
                 $('#ship-menu-hover').append($divCrew);
                 for (attr in Game.player.crewList) {
-                    $divCrewMember = "<div class='row'><figure class='col-sm-12 crew-member-entry'>" 
-                                     + Game.player.crewList[attr].getName() + ": " 
-                                     + Game.player.crewList[attr].getProfession() + "</figure></div>";
-                    $('#crew-manifest').append($divCrewMember); 
+                    $divCrewMember = "<figure class='col-sm-2 crew-member-entry'><p>" 
+                                     + Game.player.crewList[attr].getName() + "</p><p>" 
+                                     + Game.player.crewList[attr].getProfession() + "</p><p>"
+                                     + Game.player.crewList[attr].getXP() + " xp</p></figure>";
+                    $('#crew-manifest-row').append($divCrewMember); 
                 };
             };
         });
 
         $('#wrapper .crew').on('mouseleave', function() {
+            $('#ship-menu-hover').empty();
+        });
+
+        // display weight
+        $('#wrapper .weight').on('mouseenter', function() {
+            $divWeight = "<figure class='col-sm-12 ship-menu-hover-weight'><div class='row' id='weight-display'>\
+                         </div></figure>";
+                $('#ship-menu-hover').append($divWeight);
+                var crewWeight = Game.player.crewWeight;
+                var foodWeight = Game.player.foodWeight;
+                var fuelWeight = Game.player.fuelWeight;
+                var armoryWeight = Game.player.armoryWeight;
+                var cargoWeight = Game.player.cargoWeight;
+                var droneWeight = Game.player.droneWeight;
+                var totalWeight = Game.player.shipWeight;
+                var weightCapacity = Game.player.engines * Game.player.WEIGHT_PER_ENGINE;
+                $divCrewWeight = "<figure class='col-sm-2 weight-entry'>crew: \
+                                 " + crewWeight + "</figure>";
+                $divFoodWeight = "<figure class='col-sm-2 weight-entry'>food: \
+                                 " + foodWeight + "</figure>";
+                $divFuelWeight = "<figure class='col-sm-2 weight-entry'>fuel: \
+                                 " + fuelWeight + "</figure>";
+                $divArmoryWeight = "<figure class='col-sm-2 weight-entry'>weapons: \
+                                 " + armoryWeight + "</figure>";
+                $divCargoWeight = "<figure class='col-sm-2 weight-entry'>cargo: \
+                                  " + cargoWeight + "</figure>";
+                $divDroneWeight = "<figure class='col-sm-2 weight-entry'>drones: \
+                                  " + droneWeight + "</figure></div>";
+                $divTotalWeight = "<figure class='col-sm-2 weight-entry'>total: \
+                                  " + totalWeight + "</figure>";
+                $divCapacity = "<figure class='col-sm-2 weight-entry'>capacity: \
+                                  " + weightCapacity + "</figure>";
+                $('#weight-display').append($divCrewWeight);
+                $('#weight-display').append($divFoodWeight);
+                $('#weight-display').append($divFuelWeight);
+                $('#weight-display').append($divArmoryWeight);
+                $('#weight-display').append($divCargoWeight);
+                $('#weight-display').append($divDroneWeight);
+                $('#weight-display').append($divTotalWeight);
+                $('#weight-display').append($divCapacity);
+        });
+
+        $('#wrapper .weight').on('mouseleave', function() {
             $('#ship-menu-hover').empty();
         });
     },
@@ -180,8 +226,8 @@ var UI = {
                        <figure class='col-sm-1 ship-menu' id='ship-money'></figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-fuel-title'>fuel</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-fuel'></figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-weight-title'>weight</figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-weight'></figure></div>\
+                       <figure class='col-sm-1 ship-menu weight' id='ship-weight-title'>weight</figure>\
+                       <figure class='col-sm-1 ship-menu weight' id='ship-weight'></figure></div>\
                        <div class='row ship-info' id='ship-menu'>\
                        <figure class='col ship-menu-button'>status</figure>\
                        <figure class='col ship-menu-button'>cargo</figure>\
@@ -214,7 +260,7 @@ var UI = {
         $('#ship-fuel').empty();
         $('#ship-fuel').append(ship.fuel);
         $('#ship-weight').empty();
-        $('#ship-weight').append(ship.shipWeight);
+        $('#ship-weight').append(ship.shipWeightDisplay);
         $('#ship-day').empty();
         $('#ship-day').append(ship.day);
 
