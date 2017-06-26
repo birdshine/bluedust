@@ -19,6 +19,7 @@ function Weapon(name, type, category, description, value, weight, damage, flavor
     Item.call(this, name, type, category, description, value, weight);
     this.damage = damage;
     this.flavor = flavor;
+    this.broken = false;
 };
 
 /* 

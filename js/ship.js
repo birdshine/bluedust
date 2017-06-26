@@ -38,19 +38,8 @@ function Ship(name) {
     this.hull = 200;
 };
 
-// getters and setters 
-Ship.prototype.getName = function() {
-    return this.name;
-};
-
-Ship.prototype.getCargoWeight = function() {
-    return this.cargoWeight;
-};
-
-Ship.prototype.getDamage = function() {
-    return this.damage;
-};
-
+// all ship functions
+// initiate ship
 Ship.prototype.init = function(food,engines,money,fuel) {
     this.food = food;
     this.engines = engines;
@@ -58,10 +47,12 @@ Ship.prototype.init = function(food,engines,money,fuel) {
     this.fuel = fuel;
 };
 
+// initiate player ship
 Ship.prototype.initiate = function() {
     this.init(20,3,20,10);
 };
 
+// methods to appraise ship and set its stats
 Ship.prototype.weighShip = function() {
     var crew = this.crewSize * this.CREW_WEIGHT;
     this.crewWeight = crew;
@@ -82,6 +73,15 @@ Ship.prototype.weighShip = function() {
     };
 };
 
+Ship.prototype.calculateDamage = function() {
+    var damage = 0;
+    for (attr in this.armory) {
+        damage += this.armory[attr].damage;
+    };
+    this.damage = damage;
+}
+
+// methods to manipulate the ship
 Ship.prototype.attemptWeight = function(weight) { 
     this.weighShip(); 
     attempt = this.shipWeight + weight;
@@ -112,6 +112,7 @@ Ship.prototype.addCrew = function(name, profession) {
         this.crewList[key] = crew;
         this.crewSize++;
         this.weighShip();
+        
     } else {
         return false;
     };
@@ -125,7 +126,7 @@ Ship.prototype.addWeapon = function(weapon) {
         this.armory[key] = value;
         this.armorSize++;
         this.armoryWeight += weapon.weight;
-        this.damage += weapon.damage;
+        this.calculateDamage();
         this.weighShip();
     } else {
         return false
