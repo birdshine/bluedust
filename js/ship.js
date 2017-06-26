@@ -77,9 +77,8 @@ Ship.prototype.calculateDamage = function() {
         damage += this.armory[attr].damage;
     };
     this.damage = damage;
-}
+};
 
-// methods to manipulate the ship
 Ship.prototype.attemptWeight = function(weight) { 
     this.weighShip(); 
     attempt = this.shipWeight + weight;
@@ -91,48 +90,46 @@ Ship.prototype.attemptWeight = function(weight) {
     };
 };
 
-Ship.prototype.addCargo = function(item) {
-        var attempt = this.attemptWeight(item.weight);
-        if (attempt === true) {
-            var key = Die.generateId();
-            var value = item
-            this.cargoList[key] = value;
-            this.cargoSize++;
-            this.cargoWeight += item.weight;
-            this.weighShip();
-        } else {
-            return false;
-        };
-};
-
-Ship.prototype.addCrew = function(name, profession) {
+Ship.prototype.checkCrewCapacity = function() {
     if (this.crewSize < this.MAXIMUM_CREW) {
         var attempt = this.attemptWeight(this.CREW_WEIGHT);
         if (attempt === true) {
-            var crew = new Person(name, profession);
-            var key = crew.getName();
-            this.crewList[key] = crew;
-            this.crewSize++;
-            this.weighShip();
+            return true;
         } else {
             return false;
         };
     } else {
         return false;
-    }
+    };
+};
+
+// methods to manipulate the ship
+Ship.prototype.addCargo = function(item) {
+    var key = Die.generateId();
+    var value = item
+    this.cargoList[key] = value;
+    this.cargoSize++;
+    this.cargoWeight += item.weight;
+    this.weighShip();
+    return key;
+};
+
+Ship.prototype.addCrew = function(name, profession) {
+    var crew = new Person(name, profession);
+    var key = crew.getName();
+    this.crewList[key] = crew;
+    this.crewSize++;
+    this.weighShip();
+    return key;
 };
 
 Ship.prototype.addWeapon = function(weapon) {
-    var attempt = this.attemptWeight(weapon.weight);
-    if (attempt === true) {
-        var key = Die.generateId();
-        var value = weapon;
-        this.armory[key] = value;
-        this.armorSize++;
-        this.armoryWeight += weapon.weight;
-        this.calculateDamage();
-        this.weighShip();
-    } else {
-        return false
-    };
+    var key = Die.generateId();
+    var value = weapon;
+    this.armory[key] = value;
+    this.armorSize++;
+    this.armoryWeight += weapon.weight;
+    this.calculateDamage();
+    this.weighShip();
+    return key;
 };

@@ -265,5 +265,6 @@ var UI = {
         $('#ship-day').append(ship.day);
 
         UI.refreshClickListener();
-    }
+    },
+    
 };
