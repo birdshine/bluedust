@@ -22,9 +22,10 @@ function Ship(name) {
     this.cargoSize = 0;
     this.cargoWeight = 0;
     this.armory = {};
-    this.armorSize = 0;
+    this.armorySize = 0;
     this.armoryWeight = 0;
     this.damage = 0;
+
     this.crewList = {};
     this.crewSize = 0;
     this.crewWeight = 0;
@@ -66,6 +67,9 @@ Ship.prototype.weighShip = function() {
     var cargo = this.cargoWeight;
     var drones = this.droneWeight;
     var shipWeight = crew + food + fuel + armory + cargo + drones;
+    if (shipWeight < 0) {
+        shipWeight = 0;
+    };
     var weightCapacity = this.engines * this.WEIGHT_PER_ENGINE;
     this.shipWeight = shipWeight;
     this.shipWeightDisplay = Math.round(shipWeight);
@@ -74,7 +78,9 @@ Ship.prototype.weighShip = function() {
 Ship.prototype.calculateDamage = function() {
     var damage = 0;
     for (attr in this.armory) {
-        damage += this.armory[attr].damage;
+        if (this.armory[attr].broken === false) {
+            damage += this.armory[attr].damage;
+        };
     };
     this.damage = damage;
 };
@@ -105,7 +111,7 @@ Ship.prototype.checkCrewCapacity = function() {
 
 // methods to manipulate the ship
 Ship.prototype.addCargo = function(item) {
-    var key = Die.generateId();
+    var key = item.id;
     var value = item
     this.cargoList[key] = value;
     this.cargoSize++;
@@ -114,27 +120,56 @@ Ship.prototype.addCargo = function(item) {
     return key;
 };
 
+Ship.prototype.removeCargo = function(key) {
+    for (attr in this.cargoList) {
+        if (attr === key) {
+            this.cargoWeight -= this.cargoList[attr].weight;
+            delete this.cargoList[attr];
+            this.cargoSize--;
+            this.weighShip();
+        };
+    };
+};
+
 Ship.prototype.addCrew = function(name, profession) {
     var crew = new Person(name, profession);
-    var key = crew.getName();
+    var key = crew.name;
     this.crewList[key] = crew;
     this.crewSize++;
     this.weighShip();
-    return key;
+    return crew;
+};
+
+Ship.prototype.removeCrew = function(name) {
+    delete this.crewList[name];
+    this.crewSize--;
+    this.weighShip();
 };
 
 Ship.prototype.addWeapon = function(weapon) {
-    var key = Die.generateId();
+    var key = weapon.id
     var value = weapon;
     this.armory[key] = value;
-    this.armorSize++;
+    this.armorySize++;
     this.armoryWeight += weapon.weight;
     this.calculateDamage();
     this.weighShip();
     return key;
 };
 
+Ship.prototype.removeWeapon = function(key) {
+    this.armoryWeight -= this.armory[key].weight;
+    delete this.armory[key];
+    this.armorySize--;
+    this.weighShip();
+};
+
 Ship.prototype.addFuel = function(number) {
     this.fuel += number;
+    this.weighShip();
+};
+
+Ship.prototype.removeFuel = function(number) {
+    this.fuel -= number;
     this.weighShip();
 };

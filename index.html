@@ -16,43 +16,46 @@
       integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
     <body>
-    <div id="wrapper">
-      <section class="header">
-        <div class="container">
-          <div class="row text-center">
-            <nav class="col-sm-8 text-left">
-              <div class="btn btn-primary user-nav" id="user-menu" role="button">
-                menu
-              </div>
-              <div class="btn btn-primary user-nav" id="user-log" role="button">
-                log
-              </div>
-            </nav>
-          </div>
-        </div>
-      </section>
-      <section class="container">
-        <div class="row screen">
-        </div>
-      </section>
-      <footer class="container" id="footer">
-        <div class="row terminal">
-          <figure class="col-sm-12" id="terminal-echo">
-            <p>
-              >> booting ......................................................................<br />
-              >> This device tree is enabled.<br />
-              >> This DNL device supports FLCL access.
-            </p>
-          </figure>
-        </div>
-        <div class="row terminal">
-          <figure class="col-sm-12">
-            <div class="form-group" id="#user-terminal">
-              <input type="txt" id="user-terminal-text" name="text" value="dnl@olivaw: >> " spellcheck="false" />
+    <div class="row" id="wrapper">
+      <figure class='col-sm-1' id='left-menu'></figure>
+      <figure class='col' id='right-display'>
+        <section class="header">
+          <div class="container">
+            <div class="row text-center">
+              <nav class="col-sm-8 text-left">
+                <div class="btn btn-primary user-nav" id="user-menu" role="button">
+                  menu
+                </div>
+                <div class="btn btn-primary user-nav" id="user-log" role="button">
+                  log
+                </div>
+              </nav>
             </div>
-          </figure>
-        </div>
-      </footer>
+          </div>
+        </section>
+        <section class="container">
+          <div class="row screen">
+          </div>
+        </section>
+        <footer class="container" id="footer">
+          <div class="row terminal">
+            <figure class="col-sm-12" id="terminal-echo">
+              <p>
+                >> booting ...................................................<br />
+                >> This device tree is enabled.<br />
+                >> This DNL device supports FLCL access.
+              </p>
+            </figure>
+          </div>
+          <div class="row terminal">
+            <figure class="col-sm-12">
+              <div class="form-group" id="#user-terminal">
+                <input type="txt" id="user-terminal-text" name="text" value="dnl@olivaw: >> " spellcheck="false" />
+              </div>
+            </figure>
+          </div>
+        </footer>
+      </figure>
     </div>
   </body>
 </html>

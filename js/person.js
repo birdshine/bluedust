@@ -16,25 +16,33 @@ function Person(name, profession) {
     this.strength = 1;
     this.damage = 0;
     this.weapons = [];
+    this.armor = {
+        head: ['none', 0],
+        torso: ['none', 0],
+        legs: ['none', 0],
+        acc: ['none', 0]
+    };
     this.inventory = [];
     this.xp = 0;
     this.name = name;
     this.profession = profession;
-}
-
-// person getters and setters
-Person.prototype.getName = function() {
-    return this.name;
+    this.id = Die.generateId();
+    this.alive = true;
 };
 
-Person.prototype.getProfession = function() {
-    return this.profession;
+Person.prototype.die = function() {
+    this.alive = false;
+    this.xp = 0;
+    this.profession = 'corpse';
+    this.strength = 0;
+    this.wounds = 0;
 };
 
-Person.prototype.getXP = function() {
-    return this.xp;
-};
-
-Person.prototype.getWounds = function() {
-    return this.wounds;
+Person.prototype.checkWounds = function() {
+    if (this.wounds > this.MAXIMUM_WOUNDS) {
+        this.die();
+        return false;
+    } else {
+        return true;
+    };
 };

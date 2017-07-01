@@ -9,6 +9,7 @@ function Item(name, type, category, description, value, weight) {
     this.description = description;
     this.value = value;
     this.weight = weight;
+    this.id = Die.generateId();
 };
 
 // creates weapon inheriting item
@@ -19,6 +20,16 @@ function Weapon(name, type, category, description, value, weight, damage, flavor
     Item.call(this, name, type, category, description, value, weight);
     this.damage = damage;
     this.flavor = flavor;
+    this.broken = false;
+};
+
+// weapon methods
+
+Weapon.prototype.break = function() {
+    this.broken = true;
+};
+
+Weapon.prototype.repair = function() {
     this.broken = false;
 };
 

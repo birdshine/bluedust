@@ -98,6 +98,7 @@ footer li img {
 
 #wrapper {
   overflow-y: hidden;
+  width: 100%;
 }
 
 .terminal {
@@ -171,6 +172,7 @@ footer li img {
 
 .message-content {
   cursor: pointer;
+  text-align: left;
 }
 
 #user-terminal {
@@ -218,6 +220,12 @@ footer li img {
 
 .ship-menu {
   position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.ship-menu-button {
+  margin: 0 0 40px 0;
 }
 
 .ship-menu-hover-crew {
@@ -254,13 +262,30 @@ footer li img {
   width: 100%;
 }
 
-.ship-menu-button {
-  margin: auto;
-}
-
 .ship-member-entry {
   text-align: center;
   padding: 5px;
+}
+
+#left-menu {
+  text-align: center;
+  width: 10%;
+  padding: 0 0 0 40px;
+  margin: 80px 0 0 0;
+  float: left;
+  cursor: pointer;
+  font: 14px/14px "lucida console",sans-serif;
+}
+
+#right-display {
+  float: right;
+  width: 90%;
+  margin: 0;
+  text-align: center;
+}
+
+#terminal-echo {
+  text-align: left;
 }
 
 /*

@@ -6,6 +6,7 @@ var Game = {
     player: {},
     itemsCreated: {},
     peopleCreated: {},
+    crewCreated: {},
 
     //initiate the player
     initPlayer: function() {
@@ -18,8 +19,9 @@ var Game = {
     attemptAddCrew: function(name, profession) {
         var attempt = Game.player.checkCrewCapacity();
         if (attempt === true) {
-            var key = Game.player.addCrew(name, profession);
-            Game.peopleCreated[key] = 'crew';
+            var crew = Game.player.addCrew(name, profession);
+            var key = crew.name;
+            Game.crewCreated[key] = crew;
             UI.createMessage('crew added', (name + ', ' + profession + ', has joined the ship.'), 
                              'positive', 'crew added');
             
@@ -28,6 +30,22 @@ var Game = {
             UI.createMessage('crew destroyed', ('you are unable to take on ' + name), 
                              'negative', 'crew destroyed');
         };
+    },
+
+    removePlayerCrew: function(name) {
+        Game.player.removeCrew(name);
+        UI.createMessage('crew member lost', (name + ' has left the ship.'), 'negative', 
+                         (name + ' left the ship'));
+        
+        UI.refreshShipInfo(Game.player);
+    },
+
+    killPlayerCrew: function(name) {
+        Game.player.removeCrew(name);
+        Game.crewCreated[name].die();
+        UI.createMessage('crew member dead', (name + ' has died.'), 'negative', (name + ' died'));
+
+        UI.refreshShipInfo(Game.player);
     },
 
     attemptAddShipWeapon: function(weapon) {
@@ -97,5 +115,11 @@ $(document).ready(function() {
 
     // initiate ship UI
     UI.shipInit(Game.player);
+    var firstWeapon = ItemList.shipGunLaser();
+    Game.attemptAddShipWeapon(firstWeapon)
+    Game.attemptAddCrew('julian', 'evil soap opera character');
+    Game.killPlayerCrew('julian');
+    Game.player.removeWeapon(firstWeapon.id);
+    UI.refreshShipInfo(Game.player);
     UI.refreshClickListener();
 });

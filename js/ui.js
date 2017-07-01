@@ -70,9 +70,9 @@ var UI = {
                 $('#ship-menu-hover').append($divCrew);
                 for (attr in Game.player.crewList) {
                     $divCrewMember = "<figure class='col-sm-2 crew-member-entry'><p>" 
-                                     + Game.player.crewList[attr].getName() + "</p><p>" 
-                                     + Game.player.crewList[attr].getProfession() + "</p><p>"
-                                     + Game.player.crewList[attr].getXP() + " xp</p></figure>";
+                                     + Game.player.crewList[attr].name + "</p><p>" 
+                                     + Game.player.crewList[attr].profession + "</p><p>"
+                                     + Game.player.crewList[attr].xp + " xp</p></figure>";
                     $('#crew-manifest-row').append($divCrewMember); 
                 };
             };
@@ -208,34 +208,32 @@ var UI = {
 
         // create ship ui and append it to the footer
         $divShipInfo = "<div class='row ship-info'>\
-                       <figure class='col-sm-1 ship-menu' id='ship-day-title'>day</figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-day-title'>day:</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-day'></figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-distance-title'>distance</figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-distance'></figure>\
-                       <figure class='col-sm-1 ship-menu crew' id='ship-crew-title'>crew</figure>\
+                       <figure class='col-sm-1 ship-menu crew' id='ship-crew-title'>crew:</figure>\
                        <figure class='col-sm-1 ship-menu crew' id='ship-crew'></figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-food-title'>food</figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-food-title'>food:</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-food'></figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-engines-title'>engines</figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-engines-title'>engines:</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-engines'></figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-hull-title'>hull</figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-hull-title'>hull:</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-hull'></figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-damage-title'>damage</figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-damage-title'>damage:</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-damage'></figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-money-title'>money</figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-money-title'>money:</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-money'></figure>\
-                       <figure class='col-sm-1 ship-menu' id='ship-fuel-title'>fuel</figure>\
+                       <figure class='col-sm-1 ship-menu' id='ship-fuel-title'>fuel:</figure>\
                        <figure class='col-sm-1 ship-menu' id='ship-fuel'></figure>\
-                       <figure class='col-sm-1 ship-menu weight' id='ship-weight-title'>weight</figure>\
+                       <figure class='col-sm-1 ship-menu weight' id='ship-weight-title'>weight:</figure>\
                        <figure class='col-sm-1 ship-menu weight' id='ship-weight'></figure></div>\
-                       <div class='row ship-info' id='ship-menu'>\
-                       <figure class='col ship-menu-button'>status</figure>\
-                       <figure class='col ship-menu-button'>cargo</figure>\
-                       <figure class='col ship-menu-button'>weapons</figure>\
-                       <figure class='col ship-menu-button'>drones</figure>\
-                       <figure class='col ship-menu-button'>colonies</figure></div>\
                        <div class='row' id='ship-menu-hover'></div>"
+        var $divShipMenu = "<div class='row ship-menu-button'>status</div>\
+                            <div class='row ship-menu-button'>cargo</div>\
+                            <div class='row ship-menu-button'>weapons</div>\
+                            <div class='row ship-menu-button'>drones</div>\
+                            <div class='row ship-menu-button'>colonies</div>"
         $('#footer').append($divShipInfo);
+        $('#left-menu').append($divShipMenu);
 
         // fill ship stats with player ship info
         UI.refreshShipInfo(ship);
